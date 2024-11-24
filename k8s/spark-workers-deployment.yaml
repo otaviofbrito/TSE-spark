@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spark-worker
+spec:
+  replicas: 2 # Número de Workers
+  selector:
+    matchLabels:
+      app: spark
+      role: worker
+  template:
+    metadata:
+      labels:
+        app: spark
+        role: worker
+    spec:
+      containers:
+        - name: spark-worker
+          image: bitnami/spark:latest
+          ports:
+            - containerPort: 7078 # Porta do Spark Worker
+          env:
+            - name: SPARK_MODE
+              value: 'worker'
+            - name: SPARK_MASTER
+              value: 'spark://spark-master:7077' # URL do Spark Master
