@@ -17,6 +17,7 @@ spec:
       containers:
         - name: spark-master
           image: bitnami/spark:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 7077 # Porta do Spark Master
             - containerPort: 8080 # UI do Spark Master
