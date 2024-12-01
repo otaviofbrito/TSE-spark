@@ -3,8 +3,9 @@ import json
 import os
 import zipfile
 
-json_path = 'source.json'
-volume_path = "../Volumes/raw/tse"
+json_path = '/app/extract_data/source.json'
+# volume_path = "../Volumes/raw/tse"
+volume_path = "/app/data/raw"
 
 
 def load_json(path):
@@ -44,7 +45,7 @@ def extract_zip(zip_path, extract_to):
 
 def main():
     json_data = load_json(json_path)
-    
+
     for key, value in json_data.items():
         folder_path = os.path.join(volume_path, value['dir'])
         os.makedirs(folder_path, exist_ok=True)

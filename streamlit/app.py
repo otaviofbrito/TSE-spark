@@ -16,10 +16,11 @@ st.write("Este dashboard apresenta gráficos dos dados de eleições brasileiras
 @st.cache_data
 def load_data():
     # Substitua pelo caminho para o diretório onde o arquivo está localizado
-    folder_path = "./Volumes/gold/tse/consulta_cand"
+    #folder_path = "./Volumes/gold/tse/consulta_cand"
+    folder_path = "/data/Volumes/raw/tse/consulta_cand_2024"
 
     # Encontra o único arquivo CSV na pasta
-    file_path = glob.glob(f"{folder_path}/part-*.csv")
+    file_path = glob.glob(f"{folder_path}/*BRASIL.csv")
 
     # Verifica se algum arquivo foi encontrado
     if not file_path:

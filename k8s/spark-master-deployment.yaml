@@ -1,3 +1,4 @@
+# spark-master-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,12 +18,16 @@ spec:
       containers:
         - name: spark-master
           image: bitnami/spark:latest
-          imagePullPolicy: IfNotPresent
+          command:
+            - "/opt/bitnami/spark/bin/spark-class"
+            - "org.apache.spark.deploy.master.Master"
           ports:
-            - containerPort: 7077 # Porta do Spark Master
-            - containerPort: 8080 # UI do Spark Master
-          env:
-            - name: SPARK_MODE
-              value: 'master'
-            - name: SPARK_MASTER
-              value: 'spark://spark-master:7077' # URL do Spark Master
+            - containerPort: 7077
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /data
+              name: data-volume
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: data-volume-claim
