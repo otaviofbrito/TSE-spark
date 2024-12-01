@@ -1,7 +1,10 @@
 # %%
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import to_date
-spark = SparkSession.builder.appName("consulta_cand_raw").getOrCreate()
+spark = (SparkSession.builder
+         .appName("consulta_cand_raw")
+         .master("local[4]")
+         .getOrCreate())
 
 # %%
 #Load Dataset
@@ -47,8 +50,6 @@ df = df.replace(
 
 #Corrigindo Data
 df = df.withColumn("DT_NASCIMENTO", to_date("DT_NASCIMENTO", "dd/MM/yyyy"))
-df.show()
-df.printSchema()
 
 
 # %%
