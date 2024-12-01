@@ -24,8 +24,8 @@ df = spark.read.csv(file_path1,
                     inferSchema=True)
 
 df2 = spark.read.csv(file_path2,
-                    header=True,
-                    inferSchema=True)
+                     header=True,
+                     inferSchema=True)
 
 # %%
 
@@ -36,6 +36,8 @@ result = result.withColumn("VR_BEM_TOTAL", F.round(F.col("VR_BEM_TOTAL"), 2))
 
 df2 = df2.join(result, on="SQ_CANDIDATO", how="left")
 
+
+df2 = df2.fillna({"VR_BEM_TOTAL": 0.0})
 
 # %%
 # Saving DataFrame
