@@ -33,7 +33,7 @@ def load_data():
     return pd.read_csv(file_path)
 
 
-page = st.sidebar.selectbox('Escolha uma página', ['Página 1', 'Página 2'])
+page = st.sidebar.selectbox('Página:', ['Candidatos', 'Bens declarados'])
 
 data = load_data()
 
@@ -88,21 +88,38 @@ fig = px.bar(
 )
 st.plotly_chart(fig)
 
-# DIV 3
-st.subheader("2. Distribuição de Candidatos por Estado e Raça")
-st.write("Gráfico de barras empilhadas mostrando o número de candidatos por estado, divididos por Raça.")
-grouped_data = data.groupby(
-    ["SG_UF", "DS_GRAU_INSTRUCAO"]).size().reset_index(name="NUM_CANDIDATOS")
+# Título da aplicação
+st.title("Gráfico de Pizza Subdividido por Grau de Instrução")
 
-fig = px.bar(
-    grouped_data,
-    x="SG_UF",
-    y="NUM_CANDIDATOS",
-    color="DS_COR_RACA",
-    title="Distribuição de Candidatos por Estado e Gênero",
-    labels={"NUM_CANDIDATOS": "Nº de Candidatos",
-            "SG_UF": "Estado", "DS_GRAU_INSTRUCAO": "Gênero"},
-    barmode="stack"  # Personalização de cores
+# Seleção dos estados
+selected_states = st.multiselect(
+    "Selecione os estados para incluir no gráfico:",
+    options=data["SG_UF"].unique()
+)
+
+# Filtrar os dados com base nos estados selecionados
+filtered_df = data[data["SG_UF"].isin(selected_states)]
+
+# Agrupar os dados por grau de instrução e calcular o total de candidatos
+grouped_df = (
+    filtered_df.groupby(["SG_UF", "DS_GRAU_INSTRUCAO"], as_index=False)
+    .agg({"SQ_CANDIDATO": "count"})
+)
+
+# Calcular a porcentagem para cada grau de instrução
+total_candidatos = grouped_df["SQ_CANDIDATO"].sum()
+grouped_df["Porcentagem"] = (grouped_df["SQ_CANDIDATO"] / total_candidatos) * 100
+
+# Criar o gráfico de pizza subdividido por grau de instrução
+fig = px.pie(
+    grouped_df,
+    names="DS_GRAU_INSTRUCAO",
+    values="Porcentagem",
+    color="DS_GRAU_INSTRUCAO",
+    title=f"Distribuição de Grau de Instrução - {selected_states}",
+    template="plotly",
+    labels={"Porcentagem": "% de Candidatos"},
+    hole=0.4  # Gráfico de rosca (opcional)
 )
 st.plotly_chart(fig)
 
