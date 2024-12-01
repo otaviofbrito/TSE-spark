@@ -16,11 +16,11 @@ st.write("Este dashboard apresenta gráficos dos dados de eleições brasileiras
 @st.cache_data
 def load_data():
     # Substitua pelo caminho para o diretório onde o arquivo está localizado
-    #folder_path = "./Volumes/gold/tse/consulta_cand"
-    folder_path = "/data/Volumes/raw/tse/consulta_cand_2024"
+    # folder_path = "./Volumes/gold/tse/consulta_cand" ## -- Usar essa se for rodar sem kubernetes
+    folder_path = "/data/gold/consulta_cand"
 
     # Encontra o único arquivo CSV na pasta
-    file_path = glob.glob(f"{folder_path}/*BRASIL.csv")
+    file_path = glob.glob(f"{folder_path}/part-*.csv")
 
     # Verifica se algum arquivo foi encontrado
     if not file_path:
@@ -109,7 +109,8 @@ grouped_df = (
 
 # Calcular a porcentagem para cada grau de instrução
 total_candidatos = grouped_df["SQ_CANDIDATO"].sum()
-grouped_df["Porcentagem"] = (grouped_df["SQ_CANDIDATO"] / total_candidatos) * 100
+grouped_df["Porcentagem"] = (
+    grouped_df["SQ_CANDIDATO"] / total_candidatos) * 100
 
 # Criar o gráfico de pizza subdividido por grau de instrução
 fig = px.pie(
@@ -123,4 +124,3 @@ fig = px.pie(
     hole=0.4  # Gráfico de rosca (opcional)
 )
 st.plotly_chart(fig)
-

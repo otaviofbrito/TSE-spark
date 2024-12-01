@@ -10,7 +10,7 @@ spec:
       ports:
         - containerPort: 8501
       volumeMounts:
-        - mountPath: /data
+        - mountPath: /data/gold
           name: gold-tse-volume
       resources:
         requests:
