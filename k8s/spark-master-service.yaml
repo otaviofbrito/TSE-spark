@@ -3,16 +3,14 @@ kind: Service
 metadata:
   name: spark-master
 spec:
-  selector:
-    app: spark
-    role: master
   ports:
     - name: spark
-      protocol: TCP
       port: 7077
       targetPort: 7077
     - name: webui
-      protocol: TCP
       port: 8080
       targetPort: 8080
-  clusterIP: None # Não atribui um IP fixo, pois é um headless service
+  selector:
+      app: spark
+      role: master
+  type: ClusterIP

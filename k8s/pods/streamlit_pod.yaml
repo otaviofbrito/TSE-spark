@@ -10,8 +10,8 @@ spec:
       ports:
         - containerPort: 8501
       volumeMounts:
-        - mountPath: /data/gold
-          name: gold-tse-volume
+        - mountPath: /data
+          name: pv-tse-volume
       resources:
         requests:
           memory: "512Mi"  # Quantidade mínima de memória
@@ -20,6 +20,6 @@ spec:
           memory: "1Gi"    # Quantidade máxima de memória
           cpu: "1"         # Quantidade máxima de CPU (1 núcleo)
   volumes:
-    - name: gold-tse-volume
+    - name: pv-tse-volume
       persistentVolumeClaim:
-        claimName: gold-tse-claim
+        claimName: pvc-tse-claim

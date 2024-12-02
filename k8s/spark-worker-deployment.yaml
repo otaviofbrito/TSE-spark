@@ -1,29 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spark-master
+  name: spark-worker
 spec:
-  replicas: 1
+  replicas: 2 # Número de workers
   selector:
     matchLabels:
       app: spark
-      role: master
+      role: worker
   template:
     metadata:
       labels:
         app: spark
-        role: master
+        role: worker
     spec:
       containers:
-      - name: spark-master
+      - name: spark-worker
         image: my-spark-image
         imagePullPolicy: Never
         env:
         - name: SPARK_MODE
-          value: "master"
+          value: "worker"
+        - name: SPARK_MASTER_URL
+          value: "spark://spark-master:7077"
         ports:
-        - containerPort: 7077 # Comunicação entre Master e Workers
-        - containerPort: 8080 # Interface Web
+        - containerPort: 8081 # Interface Web dos Workers
         resources:
           requests:
             memory: "1Gi"
@@ -33,8 +34,8 @@ spec:
             cpu: "1"
         volumeMounts:
         - name: pv-tse-volume
-          mountPath: /app/spark/data  # Caminho onde o volume será montado dentro do contêiner
+          mountPath: /app/spark/data 
       volumes:
       - name: pv-tse-volume
         persistentVolumeClaim:
-          claimName: pvc-tse-claim 
+          claimName: pvc-tse-claim

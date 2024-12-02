@@ -4,14 +4,19 @@ from pyspark.sql import functions as F
 
 spark = (SparkSession.builder
          .appName("consulta_cand_raw")
-         .master("local[4]")
+         .master("spark://spark-master:7077") #.master("local[4]")
          .getOrCreate())
 
 # %%
 #Load Dataset
-source = "raw/tse/bem_candidato_2024"
+# source = "raw/tse/bem_candidato_2024"
+# dest = "silver/tse/bem_candidato"
+# volume_path = "../../Volumes/"
+
+source = "raw/tse/bem_candidato"
 dest = "silver/tse/bem_candidato"
-volume_path = "../../Volumes/"
+volume_path = "/app/spark/data"
+
 folder_path = f"{volume_path}/{source}"
 file_path = f"{folder_path}/*BRASIL.csv"
 output_path = f"{volume_path}/{dest}"

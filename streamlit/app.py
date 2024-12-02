@@ -17,7 +17,7 @@ st.write("Este dashboard apresenta gráficos dos dados de eleições brasileiras
 def load_data():
     # Substitua pelo caminho para o diretório onde o arquivo está localizado
     # folder_path = "./Volumes/gold/tse/consulta_cand" ## -- Usar essa se for rodar sem kubernetes
-    folder_path = "/data/gold/consulta_cand"
+    folder_path = "/data/gold/tse/consulta_cand"
 
     # Encontra o único arquivo CSV na pasta
     file_path = glob.glob(f"{folder_path}/part-*.csv")
