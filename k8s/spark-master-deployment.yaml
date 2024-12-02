@@ -21,6 +21,8 @@ spec:
         env:
         - name: SPARK_MODE
           value: "master"
+        - name: SPARK_MASTER_URL
+          value: "spark://spark-master:7077"  # Definir o Spark Master URL para os Workers
         ports:
         - containerPort: 7077 # Comunicação entre Master e Workers
         - containerPort: 8080 # Interface Web
@@ -37,4 +39,4 @@ spec:
       volumes:
       - name: pv-tse-volume
         persistentVolumeClaim:
-          claimName: pvc-tse-claim 
+          claimName: pvc-tse-claim

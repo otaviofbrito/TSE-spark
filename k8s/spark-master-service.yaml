@@ -4,13 +4,15 @@ metadata:
   name: spark-master
 spec:
   ports:
-    - name: spark
+    - protocol: TCP
+      name: spark
       port: 7077
       targetPort: 7077
-    - name: webui
+    - protocol: TCP
+      name: webui
       port: 8080
       targetPort: 8080
   selector:
       app: spark
       role: master
-  type: ClusterIP
+  clusterIP: None 

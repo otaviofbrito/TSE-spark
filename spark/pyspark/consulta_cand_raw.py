@@ -3,7 +3,6 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import to_date
 spark = (SparkSession.builder
          .appName("consulta_cand_raw")
-         .master("spark://spark-master:7077")  # .master("local[4]")
          .getOrCreate())
 
 # %%

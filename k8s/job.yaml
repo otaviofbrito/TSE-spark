@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: spark-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: spark-submit
+        image: my-spark-image  # Substitua pelo nome da sua imagem
+        imagePullPolicy: Never
+        command: ["/bin/bash", "-c"]
+        args:
+          - |
+            echo "Iniciando o Spark Submit..." &&
+            spark-submit \
+              --master spark://spark-master:7077 \
+              --deploy-mode client \
+              --conf spark.driver.host=$(hostname -i) \
+              --conf spark.jars.ivy=/tmp/.ivy \
+              --conf spark.driver.bindAddress=0.0.0.0 \
+              --conf spark.hadoop.security.authentication=none \
+              /app/spark/pyspark/consulta_cand_raw.py
+              
+        volumeMounts:
+        - name: pv-tse-volume
+          mountPath: /app/spark/data  # Caminho onde o volume será montado dentro do contêiner
+      restartPolicy: Never
+      volumes:
+      - name: pv-tse-volume
+        persistentVolumeClaim:
+          claimName: pvc-tse-claim

@@ -5,6 +5,7 @@ from pyspark.sql import functions as F
 spark = (SparkSession.builder
          .appName("consulta_cand_raw")
          .master("spark://spark-master:7077")
+         .config("spark.submit.deployMode", "client")
          .getOrCreate())
 
 # %%
