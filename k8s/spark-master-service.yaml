@@ -16,3 +16,26 @@ spec:
       app: spark
       role: master
   clusterIP: None 
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: spark-master-service
+spec:
+  ports:
+    - protocol: TCP
+      name: spark
+      port: 7077
+      targetPort: 7077
+      nodePort: 30000
+    - protocol: TCP
+      name: webui
+      port: 8080
+      targetPort: 8080
+      nodePort: 30001
+  selector:
+      app: spark
+      role: master
+  type: NodePort

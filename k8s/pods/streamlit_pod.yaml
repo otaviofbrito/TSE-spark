@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: streamlit-app
+  labels:
+    app: streamlit-app  # Este label será usado no selector do Service
 spec:
   containers:
     - name: streamlit

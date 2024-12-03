@@ -11,6 +11,7 @@ docker build -t my-extract-data-image .
 
 
 
+
 kubectl exec -it spark-master-9846cfc54-k78xh -- spark-submit \
   --master spark://spark-master:7077 \
   --deploy-mode client \
@@ -45,3 +46,7 @@ kubectl exec -it "$SPARK_MASTER_POD" -- spark-submit \
   --conf spark.driver.bindAddress=spark-master-service \
   --conf spark.driver.host=spark-master-service \
   /app/spark/pyspark/consulta_cand_raw.py
+
+
+
+http://localhost:8501
