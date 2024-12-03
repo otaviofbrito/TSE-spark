@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
 spark = (SparkSession.builder
-         .appName("consulta_cand_raw")
+         .appName("consolidate_bem_cand_agg_value")
          .master("spark://spark-master:7077")
          .config("spark.submit.deployMode", "client")
          .getOrCreate())

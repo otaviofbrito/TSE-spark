@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
 spark = (SparkSession.builder
-         .appName("consulta_cand_raw")
+         .appName("consulta_bem_raw")
          .master("spark://spark-master:7077") #.master("local[4]")
          .config("spark.submit.deployMode", "client")
          .getOrCreate())
