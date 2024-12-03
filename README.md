@@ -1,8 +1,8 @@
-# 🗳️ Coleta e Processamento de Dados de Candidatos - Eleições 2024 
+# 🗳️ Coleta e Processamento Distribuído de Dados de Candidatos - Eleições 2024 
 
 ## Descrição do Projeto
 
-Este projeto tem como objetivo coletar dados sobre os candidatos das eleições de 2024, processá-los de forma distribuída utilizando o Apache Spark e Kubernetes, e, por fim, disponibilizar uma página interativa no **Streamlit** com análises e gráficos baseados nos dados processados. O objetivo final é fornecer uma plataforma visual para análise dos dados dos candidatos.
+Este projeto tem como objetivo coletar dados sobre os **candidatos das eleições de 2024**, processá-los de forma distribuída utilizando o Apache Spark e Kubernetes, e, por fim, disponibilizar uma página interativa no **Streamlit** com análises e gráficos baseados nos dados processados.
 
 ## Tecnologias Utilizadas 🛠️
 
@@ -64,9 +64,9 @@ Antes de rodar o projeto, você precisará instalar e configurar os seguintes co
    Construa as imagens Docker para os três componentes principais: **Extração de Dados**, **Streamlit** e **Spark**.
 
    ```bash
-   docker build -t my-extract-data-image ./extract_data
-   docker build -t my-streamlit-image ./streamlit
-   docker build -t my-spark-image ./spark
+    docker build -t my-extract-data-image ./extract_data &&
+    docker build -t my-streamlit-image ./streamlit && 
+    docker build -t my-spark-image ./spark
    ```
 
 6. **Permissões de Execução**:
@@ -103,7 +103,7 @@ Antes de rodar o projeto, você precisará instalar e configurar os seguintes co
    ./delete.sh
    ```
 
-10. **Executar os Scripts de Processamento de Dados**:
+10. **Executar os Jobs PySpark**:
 
     Para processar os dados utilizando o Spark, execute o seguinte script:
 
