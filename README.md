@@ -6,12 +6,14 @@ Este projeto tem como objetivo coletar dados sobre os candidatos das eleições 
 
 ## Tecnologias Utilizadas 🛠️
 
-- **Kubernetes**: Orquestração de containers para escalabilidade e gerenciamento de recursos.
-- **Minikube**: Ferramenta para rodar o Kubernetes localmente.
-- **Apache Spark**: Processamento de grandes volumes de dados de forma distribuída.
-- **PySpark**: Interface Python para o Apache Spark.
-- **Docker**: Containerização das aplicações para facilitar o desenvolvimento e a implantação.
-- **Streamlit**: Framework para criar interfaces interativas com Python (utilizando Pandas e Plotly para análise de dados e visualizações).
+- [Kubernetes](https://kubernetes.io/)
+  - [Minikube](https://minikube.sigs.k8s.io/docs/)
+  - [Docker](https://www.docker.com/)
+- [Apache Spark](https://spark.apache.org/)
+  - [PySpark](https://spark.apache.org/docs/latest/api/python/index.html) 
+- [Streamlit](https://streamlit.io/)
+  - [Pandas](https://pandas.pydata.org/)
+  - [Plotly](https://plotly.com/)
 
 ## Requisitos 📋
 
